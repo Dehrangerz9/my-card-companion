@@ -81,19 +81,19 @@ function DashboardPage() {
                 {/* Card visual */}
                 <div className={`${card.gradient} relative aspect-[1.6/1] overflow-hidden rounded-2xl p-5 transition-transform group-hover:scale-[1.02]`}>
                   <div className="absolute right-4 top-4 opacity-30">
-                    <Wifi className="h-6 w-6 text-foreground rotate-90" />
+                    <Wifi className="h-6 w-6 text-white rotate-90" />
                   </div>
                   <div className="flex h-full flex-col justify-between">
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-widest text-foreground/70">
+                      <p className="text-xs font-medium uppercase tracking-widest text-white/70">
                         {card.brand}
                       </p>
-                      <p className="font-display text-lg font-bold text-foreground">
+                      <p className="font-display text-lg font-bold text-white">
                         {card.name}
                       </p>
                     </div>
                     <div>
-                      <p className="font-mono text-lg tracking-[0.2em] text-foreground/90">
+                      <p className="font-mono text-lg tracking-[0.2em] text-white/90">
                         •••• •••• •••• {card.lastFour}
                       </p>
                     </div>
