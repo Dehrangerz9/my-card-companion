@@ -30,14 +30,18 @@ export interface Invoice {
   transactions: Transaction[];
 }
 
+export function formatBRL(value: number): string {
+  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+}
+
 export const mockCards: Card[] = [
   {
     id: "card-1",
     name: "Platinum",
     lastFour: "4821",
     brand: "Visa",
-    limit: 15000,
-    used: 4230.5,
+    limit: 75000,
+    used: 21152.5,
     gradient: "credit-card-gradient-1",
     password: "1234",
   },
@@ -46,8 +50,8 @@ export const mockCards: Card[] = [
     name: "Gold",
     lastFour: "7392",
     brand: "Mastercard",
-    limit: 8000,
-    used: 2150.75,
+    limit: 40000,
+    used: 10753.75,
     gradient: "credit-card-gradient-2",
     password: "5678",
   },
@@ -56,34 +60,34 @@ export const mockCards: Card[] = [
     name: "Black",
     lastFour: "0156",
     brand: "Visa",
-    limit: 50000,
-    used: 12340.0,
+    limit: 250000,
+    used: 61700.0,
     gradient: "credit-card-gradient-3",
     password: "9012",
   },
 ];
 
 const categories = [
-  { name: "Food & Dining", icon: "🍔" },
-  { name: "Shopping", icon: "🛍️" },
-  { name: "Transport", icon: "🚗" },
-  { name: "Entertainment", icon: "🎬" },
-  { name: "Health", icon: "💊" },
-  { name: "Bills", icon: "📄" },
-  { name: "Travel", icon: "✈️" },
-  { name: "Groceries", icon: "🛒" },
+  { name: "Alimentação", icon: "🍔" },
+  { name: "Compras", icon: "🛍️" },
+  { name: "Transporte", icon: "🚗" },
+  { name: "Entretenimento", icon: "🎬" },
+  { name: "Saúde", icon: "💊" },
+  { name: "Contas", icon: "📄" },
+  { name: "Viagem", icon: "✈️" },
+  { name: "Supermercado", icon: "🛒" },
 ];
 
 function randomTransactions(cardId: string, count: number, month: number, year: number): Transaction[] {
   const merchants: Record<string, string[]> = {
-    "Food & Dining": ["Starbucks", "McDonald's", "Uber Eats", "DoorDash", "Chipotle"],
-    Shopping: ["Amazon", "Nike", "Apple Store", "Zara", "Target"],
-    Transport: ["Uber", "Lyft", "Shell Gas", "Parking Co", "Metro"],
-    Entertainment: ["Netflix", "Spotify", "Steam", "Cinema", "Disney+"],
-    Health: ["CVS Pharmacy", "Gym Pro", "Dr. Smith", "Walgreens"],
-    Bills: ["Electric Co", "Water Utility", "Internet ISP", "Phone Plan"],
-    Travel: ["Airbnb", "Delta Airlines", "Hilton Hotels", "Booking.com"],
-    Groceries: ["Whole Foods", "Trader Joe's", "Costco", "Walmart"],
+    "Alimentação": ["Starbucks", "McDonald's", "iFood", "Rappi", "Outback"],
+    "Compras": ["Amazon", "Nike", "Apple Store", "Zara", "Magazine Luiza"],
+    "Transporte": ["Uber", "99", "Shell", "Estacionamento", "Metrô"],
+    "Entretenimento": ["Netflix", "Spotify", "Steam", "Cinemark", "Disney+"],
+    "Saúde": ["Drogasil", "Smart Fit", "Dr. Silva", "Droga Raia"],
+    "Contas": ["Enel", "Sabesp", "Vivo Fibra", "Claro Celular"],
+    "Viagem": ["Airbnb", "LATAM", "Ibis Hotel", "Booking.com"],
+    "Supermercado": ["Pão de Açúcar", "Carrefour", "Assaí", "Extra"],
   };
 
   return Array.from({ length: count }, (_, i) => {
@@ -93,7 +97,7 @@ function randomTransactions(cardId: string, count: number, month: number, year: 
       id: `tx-${cardId}-${month}-${i}`,
       cardId,
       merchant: merch[Math.floor(Math.random() * merch.length)],
-      amount: Math.round((Math.random() * 300 + 5) * 100) / 100,
+      amount: Math.round((Math.random() * 1500 + 25) * 100) / 100,
       date: `${year}-${String(month).padStart(2, "0")}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, "0")}`,
       category: cat.name,
       categoryIcon: cat.icon,
@@ -106,20 +110,20 @@ export const mockInvoices: Invoice[] = mockCards.flatMap((card) => {
     {
       id: `inv-${card.id}-2026-03`,
       cardId: card.id,
-      month: "March",
+      month: "Março",
       year: 2026,
       total: 0,
-      dueDate: "2026-04-10",
+      dueDate: "10/04/2026",
       status: "paid" as const,
       transactions: randomTransactions(card.id, 15, 3, 2026),
     },
     {
       id: `inv-${card.id}-2026-04`,
       cardId: card.id,
-      month: "April",
+      month: "Abril",
       year: 2026,
       total: 0,
-      dueDate: "2026-05-10",
+      dueDate: "10/05/2026",
       status: "open" as const,
       transactions: randomTransactions(card.id, 12, 4, 2026),
     },
