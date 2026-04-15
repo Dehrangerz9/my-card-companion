@@ -321,7 +321,7 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                           type="category"
                           dataKey="name"
                           width={90}
-                          tick={{ fill: "oklch(0.6 0.02 260)", fontSize: 11 }}
+                          tick={{ fill: "oklch(0.55 0.03 285)", fontSize: 11 }}
                           axisLine={false}
                           tickLine={false}
                         />
