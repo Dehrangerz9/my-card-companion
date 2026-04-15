@@ -10,21 +10,21 @@ interface Message {
 }
 
 const QUICK_REPLIES = [
-  "What's my balance?",
-  "Show spending insights",
-  "How do I block a card?",
-  "Help with payments",
+  "Qual meu saldo?",
+  "Mostrar insights de gastos",
+  "Como bloquear um cartão?",
+  "Ajuda com pagamentos",
 ];
 
 const BOT_RESPONSES: Record<string, string> = {
-  "what's my balance?":
-    "Your **Platinum** card has $10,769.50 available. Your **Gold** card has $5,849.25 available, and your **Black** card has $37,660.00 available. Would you like more details on any card?",
-  "show spending insights":
-    "📊 Here are your top spending categories this month:\n\n1. **Shopping** — $842.30\n2. **Food & Dining** — $623.15\n3. **Transport** — $312.40\n\nYour spending is **12% lower** than last month. Great job! 🎉",
-  "how do i block a card?":
-    "To block a card:\n\n1. Go to your **Dashboard**\n2. Select the card you want to block\n3. Look for the **Freeze Card** option\n\nYou can unfreeze anytime. Need help with anything else?",
-  "help with payments":
-    "I can help with payments! Here are your options:\n\n• **Pay invoice** — Pay your current open invoice\n• **Set up autopay** — Never miss a due date\n• **Payment history** — Review past payments\n\nWhich would you like to explore?",
+  "qual meu saldo?":
+    "Seu cartão **Platinum** tem R$ 53.847,50 disponível. Seu cartão **Gold** tem R$ 29.246,25 disponível, e seu cartão **Black** tem R$ 188.300,00 disponível. Quer mais detalhes de algum cartão?",
+  "mostrar insights de gastos":
+    "📊 Aqui estão suas maiores categorias de gasto este mês:\n\n1. **Compras** — R$ 4.211,50\n2. **Alimentação** — R$ 3.115,75\n3. **Transporte** — R$ 1.562,00\n\nSeus gastos estão **12% menores** que o mês passado. Parabéns! 🎉",
+  "como bloquear um cartão?":
+    "Para bloquear um cartão:\n\n1. Vá ao seu **Painel**\n2. Selecione o cartão que deseja bloquear\n3. Procure a opção **Congelar Cartão**\n\nVocê pode desbloquear a qualquer momento. Precisa de mais ajuda?",
+  "ajuda com pagamentos":
+    "Posso ajudar com pagamentos! Aqui estão suas opções:\n\n• **Pagar fatura** — Pague sua fatura aberta\n• **Configurar débito automático** — Nunca perca o vencimento\n• **Histórico de pagamentos** — Revise pagamentos anteriores\n\nQual gostaria de explorar?",
 };
 
 function getBotResponse(input: string): string {
@@ -34,7 +34,7 @@ function getBotResponse(input: string): string {
       return value;
     }
   }
-  return "Thanks for your message! I'm a demo assistant for CardVault. Try asking about your **balance**, **spending insights**, **blocking a card**, or **payments**. 😊";
+  return "Obrigado pela mensagem! Sou o assistente demo do CardVault. Tente perguntar sobre seu **saldo**, **insights de gastos**, **bloqueio de cartão** ou **pagamentos**. 😊";
 }
 
 export function ChatbotPopup() {
@@ -43,7 +43,7 @@ export function ChatbotPopup() {
     {
       id: "welcome",
       role: "assistant",
-      content: "Hi! 👋 I'm your CardVault assistant. How can I help you today?",
+      content: "Olá! 👋 Sou o assistente do CardVault. Como posso te ajudar hoje?",
       timestamp: new Date(),
     },
   ]);
@@ -104,8 +104,8 @@ export function ChatbotPopup() {
                   <Bot className="h-4 w-4 text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-primary-foreground">CardVault Assistant</p>
-                  <p className="text-[10px] text-primary-foreground/70">Always here to help</p>
+                  <p className="text-sm font-semibold text-primary-foreground">Assistente CardVault</p>
+                  <p className="text-[10px] text-primary-foreground/70">Sempre aqui para ajudar</p>
                 </div>
               </div>
               <button
@@ -188,7 +188,7 @@ export function ChatbotPopup() {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type a message…"
+                  placeholder="Digite uma mensagem…"
                   className="flex-1 rounded-xl border border-border bg-muted/50 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
                 />
                 <button
@@ -227,7 +227,6 @@ export function ChatbotPopup() {
   );
 }
 
-/** Minimal bold/emoji markdown renderer */
 function SimpleMarkdown({ content }: { content: string }) {
   const parts = content.split(/(\*\*[^*]+\*\*|\n)/g);
   return (

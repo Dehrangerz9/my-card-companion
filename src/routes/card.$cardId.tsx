@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft, Eye, EyeOff, Lock, ChevronDown, ChevronUp,
@@ -9,15 +9,15 @@ import {
   PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip,
 } from "recharts";
 import { checkAuth } from "../lib/auth-store";
-import { mockCards, mockInvoices, getCategoryBreakdown, type Invoice } from "../lib/mock-data";
+import { mockCards, mockInvoices, getCategoryBreakdown, formatBRL, type Invoice } from "../lib/mock-data";
 
 export const Route = createFileRoute("/card/$cardId")({
   head: ({ params }) => {
     const card = mockCards.find((c) => c.id === params.cardId);
     return {
       meta: [
-        { title: `${card?.name || "Card"} — CardVault` },
-        { name: "description", content: `Manage your ${card?.name} card` },
+        { title: `${card?.name || "Cartão"} — CardVault` },
+        { name: "description", content: `Gerencie seu cartão ${card?.name}` },
       ],
     };
   },
@@ -25,9 +25,9 @@ export const Route = createFileRoute("/card/$cardId")({
   notFoundComponent: () => (
     <div className="flex min-h-screen items-center justify-center bg-background">
       <div className="text-center">
-        <h1 className="font-display text-2xl font-bold text-foreground">Card not found</h1>
+        <h1 className="font-display text-2xl font-bold text-foreground">Cartão não encontrado</h1>
         <Link to="/dashboard" className="mt-4 inline-block text-sm text-primary hover:underline">
-          Back to dashboard
+          Voltar ao painel
         </Link>
       </div>
     </div>
@@ -49,21 +49,21 @@ function CardDetailPage() {
   const { cardId } = Route.useParams();
   const navigate = useNavigate();
   const card = mockCards.find((c) => c.id === cardId);
+  const [authed, setAuthed] = useState(true);
 
-  if (typeof window !== "undefined" && !checkAuth()) {
-    navigate({ to: "/" });
-    return null;
-  }
+  useEffect(() => {
+    if (!checkAuth()) {
+      setAuthed(false);
+      navigate({ to: "/" });
+    }
+  }, [navigate]);
 
-  if (!card) {
-    return null;
-  }
+  if (!authed || !card) return null;
 
   const invoices = mockInvoices.filter((inv) => inv.cardId === cardId);
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="border-b border-border px-6 py-4">
         <div className="mx-auto flex max-w-5xl items-center gap-3">
           <Link
@@ -79,10 +79,7 @@ function CardDetailPage() {
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-8 space-y-8">
-        {/* Card password section */}
         <PasswordSection card={card} />
-
-        {/* Invoices */}
         {invoices.map((invoice) => (
           <InvoiceSection key={invoice.id} invoice={invoice} />
         ))}
@@ -116,7 +113,7 @@ function PasswordSection({ card }: { card: typeof mockCards[0] }) {
     >
       <div className="flex items-center gap-2 mb-4">
         <Lock className="h-4 w-4 text-primary" />
-        <h2 className="font-display text-base font-semibold text-foreground">Card Password</h2>
+        <h2 className="font-display text-base font-semibold text-foreground">Senha do Cartão</h2>
       </div>
 
       <div className="flex items-center gap-4 flex-wrap">
@@ -137,7 +134,7 @@ function PasswordSection({ card }: { card: typeof mockCards[0] }) {
             onClick={() => setEditing(true)}
             className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-secondary"
           >
-            Change password
+            Alterar senha
           </button>
         ) : (
           <div className="flex items-center gap-2">
@@ -146,7 +143,7 @@ function PasswordSection({ card }: { card: typeof mockCards[0] }) {
               maxLength={4}
               value={newPass}
               onChange={(e) => setNewPass(e.target.value.replace(/\D/g, ""))}
-              placeholder="4 digits"
+              placeholder="4 dígitos"
               className="w-20 rounded-lg border border-border bg-input px-2 py-1.5 text-center font-mono text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
             />
             <button
@@ -154,13 +151,13 @@ function PasswordSection({ card }: { card: typeof mockCards[0] }) {
               disabled={newPass.length !== 4}
               className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground disabled:opacity-50"
             >
-              Save
+              Salvar
             </button>
             <button
               onClick={() => { setEditing(false); setNewPass(""); }}
               className="rounded-lg px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
             >
-              Cancel
+              Cancelar
             </button>
           </div>
         )}
@@ -173,7 +170,7 @@ function PasswordSection({ card }: { card: typeof mockCards[0] }) {
               exit={{ opacity: 0 }}
               className="text-xs text-success"
             >
-              ✓ Password updated
+              ✓ Senha atualizada
             </motion.span>
           )}
         </AnimatePresence>
@@ -181,6 +178,12 @@ function PasswordSection({ card }: { card: typeof mockCards[0] }) {
     </motion.div>
   );
 }
+
+const STATUS_LABELS: Record<string, string> = {
+  paid: "paga",
+  open: "aberta",
+  overdue: "atrasada",
+};
 
 function InvoiceSection({ invoice }: { invoice: Invoice }) {
   const [expanded, setExpanded] = useState(invoice.status === "open");
@@ -194,7 +197,6 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
       animate={{ opacity: 1, y: 0 }}
       className="glass-card overflow-hidden rounded-xl"
     >
-      {/* Invoice header */}
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex w-full items-center justify-between p-5 text-left"
@@ -213,16 +215,16 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                     : "bg-primary/15 text-primary"
               }`}
             >
-              {invoice.status}
+              {STATUS_LABELS[invoice.status]}
             </span>
           </div>
           <p className="mt-0.5 text-sm text-muted-foreground">
-            Due {invoice.dueDate} · {invoice.transactions.length} transactions
+            Vencimento {invoice.dueDate} · {invoice.transactions.length} transações
           </p>
         </div>
         <div className="flex items-center gap-3">
           <span className="font-display text-lg font-bold text-foreground">
-            ${invoice.total.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+            {formatBRL(invoice.total)}
           </span>
           {expanded ? (
             <ChevronUp className="h-4 w-4 text-muted-foreground" />
@@ -247,16 +249,16 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                 <div className="rounded-lg bg-secondary/50 p-3">
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <TrendingUp className="h-3 w-3" />
-                    Avg/day
+                    Média/dia
                   </div>
                   <p className="mt-1 font-display text-lg font-bold text-foreground">
-                    ${avgPerDay.toFixed(2)}
+                    {formatBRL(avgPerDay)}
                   </p>
                 </div>
                 <div className="rounded-lg bg-secondary/50 p-3">
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <TrendingDown className="h-3 w-3" />
-                    Top category
+                    Maior categoria
                   </div>
                   <p className="mt-1 font-display text-sm font-bold text-foreground">
                     {topCategory?.icon} {topCategory?.name}
@@ -265,7 +267,7 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                 <div className="rounded-lg bg-secondary/50 p-3">
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <PieChartIcon className="h-3 w-3" />
-                    Categories
+                    Categorias
                   </div>
                   <p className="mt-1 font-display text-lg font-bold text-foreground">
                     {categories.length}
@@ -273,11 +275,10 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                 </div>
               </div>
 
-              {/* Charts row */}
+              {/* Charts */}
               <div className="grid gap-6 md:grid-cols-2">
-                {/* Pie chart */}
                 <div>
-                  <h4 className="mb-3 text-sm font-semibold text-foreground">Spend by Category</h4>
+                  <h4 className="mb-3 text-sm font-semibold text-foreground">Gastos por Categoria</h4>
                   <div className="h-48">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -296,7 +297,7 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                           ))}
                         </Pie>
                         <Tooltip
-                          formatter={(value) => `$${Number(value).toFixed(2)}`}
+                          formatter={(value) => formatBRL(Number(value))}
                           contentStyle={{
                             background: "white",
                             border: "1px solid oklch(0.91 0.02 290)",
@@ -310,9 +311,8 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                   </div>
                 </div>
 
-                {/* Bar chart */}
                 <div>
-                  <h4 className="mb-3 text-sm font-semibold text-foreground">Category Breakdown</h4>
+                  <h4 className="mb-3 text-sm font-semibold text-foreground">Detalhamento por Categoria</h4>
                   <div className="h-48">
                     <ResponsiveContainer width="100%" height="100%">
                       <BarChart data={categories.slice(0, 5)} layout="vertical">
@@ -320,13 +320,13 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                         <YAxis
                           type="category"
                           dataKey="name"
-                          width={90}
+                          width={100}
                           tick={{ fill: "oklch(0.55 0.03 285)", fontSize: 11 }}
                           axisLine={false}
                           tickLine={false}
                         />
                         <Tooltip
-                          formatter={(value) => `$${Number(value).toFixed(2)}`}
+                          formatter={(value) => formatBRL(Number(value))}
                           contentStyle={{
                             background: "white",
                             border: "1px solid oklch(0.91 0.02 290)",
@@ -357,14 +357,14 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                       className="inline-block h-2 w-2 rounded-full"
                       style={{ background: CHART_COLORS[idx % CHART_COLORS.length] }}
                     />
-                    {cat.icon} {cat.name} — ${cat.total.toFixed(2)} ({cat.count})
+                    {cat.icon} {cat.name} — {formatBRL(cat.total)} ({cat.count})
                   </span>
                 ))}
               </div>
 
-              {/* Transactions list */}
+              {/* Transactions */}
               <div>
-                <h4 className="mb-3 text-sm font-semibold text-foreground">Transactions</h4>
+                <h4 className="mb-3 text-sm font-semibold text-foreground">Transações</h4>
                 <div className="space-y-1">
                   {invoice.transactions.map((tx) => (
                     <div
@@ -379,7 +379,7 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                         </div>
                       </div>
                       <span className="font-mono text-sm font-medium text-foreground">
-                        -${tx.amount.toFixed(2)}
+                        -{formatBRL(tx.amount)}
                       </span>
                     </div>
                   ))}

@@ -7,8 +7,8 @@ import { login } from "../lib/auth-store";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CardVault — Sign In" },
-      { name: "description", content: "Sign in to manage your credit cards" },
+      { title: "CardVault — Entrar" },
+      { name: "description", content: "Entre para gerenciar seus cartões de crédito" },
     ],
   }),
   component: LoginPage,
@@ -31,7 +31,7 @@ function LoginPage() {
       if (login(email, password)) {
         navigate({ to: "/dashboard" });
       } else {
-        setError("Invalid credentials");
+        setError("Credenciais inválidas");
       }
       setLoading(false);
     }, 800);
@@ -39,7 +39,6 @@ function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      {/* Background decoration */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-accent/5 blur-3xl" />
@@ -51,7 +50,6 @@ function LoginPage() {
         transition={{ duration: 0.5 }}
         className="relative w-full max-w-md"
       >
-        {/* Logo */}
         <div className="mb-8 flex items-center justify-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 glow-primary">
             <CreditCard className="h-6 w-6 text-primary" />
@@ -61,19 +59,18 @@ function LoginPage() {
           </h1>
         </div>
 
-        {/* Login card */}
         <div className="glass-card rounded-2xl p-8">
           <h2 className="mb-1 font-display text-xl font-semibold text-foreground">
-            Welcome back
+            Bem-vindo de volta
           </h2>
           <p className="mb-6 text-sm text-muted-foreground">
-            Sign in to manage your cards
+            Entre para gerenciar seus cartões
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="mb-1.5 block text-sm font-medium text-foreground">
-                Email
+                E-mail
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -82,14 +79,14 @@ function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full rounded-lg border border-border bg-input px-3 py-2.5 pl-10 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-                  placeholder="you@example.com"
+                  placeholder="voce@exemplo.com"
                 />
               </div>
             </div>
 
             <div>
               <label className="mb-1.5 block text-sm font-medium text-foreground">
-                Password
+                Senha
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -128,16 +125,16 @@ function LoginPage() {
               {loading ? (
                 <span className="inline-flex items-center gap-2">
                   <span className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground" />
-                  Signing in…
+                  Entrando…
                 </span>
               ) : (
-                "Sign in"
+                "Entrar"
               )}
             </button>
           </form>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
-            Demo: use any email & password
+            Demo: use qualquer e-mail e senha
           </p>
         </div>
       </motion.div>
