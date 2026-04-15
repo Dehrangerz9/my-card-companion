@@ -1,14 +1,15 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CreditCard, LogOut, ChevronRight, Wifi } from "lucide-react";
 import { checkAuth, logout } from "../lib/auth-store";
-import { mockCards } from "../lib/mock-data";
+import { mockCards, formatBRL } from "../lib/mock-data";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — CardVault" },
-      { name: "description", content: "View and manage your credit cards" },
+      { title: "Painel — CardVault" },
+      { name: "description", content: "Veja e gerencie seus cartões de crédito" },
     ],
   }),
   component: DashboardPage,
@@ -16,11 +17,16 @@ export const Route = createFileRoute("/dashboard")({
 
 function DashboardPage() {
   const navigate = useNavigate();
+  const [authed, setAuthed] = useState(true);
 
-  if (typeof window !== "undefined" && !checkAuth()) {
-    navigate({ to: "/" });
-    return null;
-  }
+  useEffect(() => {
+    if (!checkAuth()) {
+      setAuthed(false);
+      navigate({ to: "/" });
+    }
+  }, [navigate]);
+
+  if (!authed) return null;
 
   const handleLogout = () => {
     logout();
@@ -32,7 +38,6 @@ function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="border-b border-border px-6 py-4">
         <div className="mx-auto flex max-w-5xl items-center justify-between">
           <div className="flex items-center gap-3">
@@ -46,25 +51,23 @@ function DashboardPage() {
             className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
           >
             <LogOut className="h-4 w-4" />
-            Sign out
+            Sair
           </button>
         </div>
       </header>
 
       <main className="mx-auto max-w-5xl px-6 py-8">
-        {/* Summary */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="font-display text-2xl font-bold text-foreground">Your Cards</h1>
+          <h1 className="font-display text-2xl font-bold text-foreground">Seus Cartões</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            Total spend: ${totalUsed.toLocaleString("en-US", { minimumFractionDigits: 2 })} of ${totalLimit.toLocaleString("en-US")} limit
+            Gasto total: {formatBRL(totalUsed)} de {formatBRL(totalLimit)} de limite
           </p>
         </motion.div>
 
-        {/* Cards grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {mockCards.map((card, i) => (
             <motion.div
@@ -78,7 +81,6 @@ function DashboardPage() {
                 params={{ cardId: card.id }}
                 className="group block"
               >
-                {/* Card visual */}
                 <div className={`${card.gradient} relative aspect-[1.6/1] overflow-hidden rounded-2xl p-5 transition-transform group-hover:scale-[1.02]`}>
                   <div className="absolute right-4 top-4 opacity-30">
                     <Wifi className="h-6 w-6 text-white rotate-90" />
@@ -100,20 +102,18 @@ function DashboardPage() {
                   </div>
                 </div>
 
-                {/* Card info */}
                 <div className="mt-3 flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-foreground">
-                      ${card.used.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                      {formatBRL(card.used)}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      of ${card.limit.toLocaleString("en-US")} limit
+                      de {formatBRL(card.limit)} de limite
                     </p>
                   </div>
                   <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
                 </div>
 
-                {/* Usage bar */}
                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-secondary">
                   <div
                     className="h-full rounded-full bg-primary transition-all"
