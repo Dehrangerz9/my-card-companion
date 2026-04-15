@@ -298,10 +298,10 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                         <Tooltip
                           formatter={(value) => `$${Number(value).toFixed(2)}`}
                           contentStyle={{
-                            background: "oklch(0.18 0.02 260)",
-                            border: "1px solid oklch(0.28 0.02 260)",
+                            background: "white",
+                            border: "1px solid oklch(0.91 0.02 290)",
                             borderRadius: "8px",
-                            color: "oklch(0.95 0.01 260)",
+                            color: "oklch(0.18 0.04 285)",
                             fontSize: "12px",
                           }}
                         />
@@ -321,17 +321,17 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                           type="category"
                           dataKey="name"
                           width={90}
-                          tick={{ fill: "oklch(0.6 0.02 260)", fontSize: 11 }}
+                          tick={{ fill: "oklch(0.55 0.03 285)", fontSize: 11 }}
                           axisLine={false}
                           tickLine={false}
                         />
                         <Tooltip
                           formatter={(value) => `$${Number(value).toFixed(2)}`}
                           contentStyle={{
-                            background: "oklch(0.18 0.02 260)",
-                            border: "1px solid oklch(0.28 0.02 260)",
+                            background: "white",
+                            border: "1px solid oklch(0.91 0.02 290)",
                             borderRadius: "8px",
-                            color: "oklch(0.95 0.01 260)",
+                            color: "oklch(0.18 0.04 285)",
                             fontSize: "12px",
                           }}
                         />
