@@ -296,7 +296,7 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                           ))}
                         </Pie>
                         <Tooltip
-                          formatter={(value: number) => `$${value.toFixed(2)}`}
+                          formatter={(value) => `$${Number(value).toFixed(2)}`}
                           contentStyle={{
                             background: "oklch(0.18 0.02 260)",
                             border: "1px solid oklch(0.28 0.02 260)",
@@ -326,7 +326,7 @@ function InvoiceSection({ invoice }: { invoice: Invoice }) {
                           tickLine={false}
                         />
                         <Tooltip
-                          formatter={(value: number) => `$${value.toFixed(2)}`}
+                          formatter={(value) => `$${Number(value).toFixed(2)}`}
                           contentStyle={{
                             background: "oklch(0.18 0.02 260)",
                             border: "1px solid oklch(0.28 0.02 260)",
