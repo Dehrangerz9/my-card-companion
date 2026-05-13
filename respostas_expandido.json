@@ -1,0 +1,18 @@
+{
+    "fatura": "Para acessar suas faturas vá para a central de faturas",
+    "parcelas": "Para parcelar o seu cartão vá para Parcelamento",
+    "roubo": "Em caso de roubo ligue para o SAC 0800",
+    "limite": "Vá para a aba de faturas para consultar o limite",
+    "senha": "Para recuperar sua senha, vá para \"esqueci minha senha\"",
+    "outros": "Não entendi. Iniciando atendimento humano",
+    "bloqueio": "Para bloquear o cartão, vá para a opção de bloqueio",
+    "dados": "Mostrando dados do cartão",
+    "pontos_cashback": "Para consultar o seu saldo de pontos ou cashback e o catálogo de prémios, aceda ao menu 'Recompensas' na sua aplicação.",
+    "contestacao": "Se não reconhece uma transação ou deseja reportar uma cobrança indevida, selecione a transação no seu extrato e clique em 'Contestar movimento'.",
+    "viagens": "Para ativar o aviso de viagem, consultar taxas internacionais ou aceder às apólices do seguro de viagem, dirija-se à secção 'Viagens e Seguros'.",
+    "anuidade": "Para informações sobre a comissão de disponibilização (anuidade) e respetivas condições de isenção, por favor consulte as definições do seu cartão.",
+    "cartao_adicional": "Pode pedir e gerir cartões adicionais para os seus familiares diretamente na opção 'Gerir Cartões' do seu homebanking.",
+    "saque": "Para informações sobre cash advance (levantamento a crédito), limites diários e comissões aplicáveis, consulte o preçário na secção 'Ajuda'.",
+    "aplicativo": "Se está a experienciar problemas com a nossa app, certifique-se de que tem a versão mais recente instalada. Para reconfigurar acessos, vá a 'Recuperar Acesso'.",
+    "beneficios": "Descubra todas as vantagens, descontos em cinemas e parcerias exclusivas da rede do seu cartão no nosso portal 'Benefícios'."
+}

@@ -1,0 +1,169 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-04-15T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app",
+  "resources": [
+    {
+      "_id": "wrk_fmu_ia",
+      "_type": "workspace",
+      "name": "FMU-IA API",
+      "description": "Users and Credit Cards API",
+      "scope": "collection",
+      "parentId": null
+    },
+    {
+      "_id": "env_base",
+      "_type": "environment",
+      "name": "Base Environment",
+      "parentId": "wrk_fmu_ia",
+      "data": {
+        "base_url": "http://localhost:5000"
+      }
+    },
+    {
+      "_id": "fld_users",
+      "_type": "request_group",
+      "name": "Users",
+      "parentId": "wrk_fmu_ia"
+    },
+    {
+      "_id": "fld_cards",
+      "_type": "request_group",
+      "name": "Credit Cards",
+      "parentId": "wrk_fmu_ia"
+    },
+    {
+      "_id": "req_create_user",
+      "_type": "request",
+      "name": "Create User",
+      "method": "POST",
+      "url": "{{ _.base_url }}/users",
+      "parentId": "fld_users",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao@email.com\",\n  \"cpf\": \"12345678900\",\n  \"age\": 25\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_list_users",
+      "_type": "request",
+      "name": "List Users",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users",
+      "parentId": "fld_users",
+      "body": {},
+      "headers": []
+    },
+    {
+      "_id": "req_get_user",
+      "_type": "request",
+      "name": "Get User",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users/1",
+      "parentId": "fld_users",
+      "body": {},
+      "headers": []
+    },
+    {
+      "_id": "req_update_user",
+      "_type": "request",
+      "name": "Update User",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/users/1",
+      "parentId": "fld_users",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"João Silva Updated\",\n  \"email\": \"joao.updated@email.com\",\n  \"age\": 26\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_delete_user",
+      "_type": "request",
+      "name": "Delete User",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/users/1",
+      "parentId": "fld_users",
+      "body": {},
+      "headers": []
+    },
+    {
+      "_id": "req_create_card",
+      "_type": "request",
+      "name": "Create Card",
+      "method": "POST",
+      "url": "{{ _.base_url }}/users/1/cards",
+      "parentId": "fld_cards",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"card_number\": \"4111111111111111\",\n  \"credit_limit\": 5000.00,\n  \"invoice_amount\": 150.75\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_list_cards",
+      "_type": "request",
+      "name": "List User Cards",
+      "method": "GET",
+      "url": "{{ _.base_url }}/users/1/cards",
+      "parentId": "fld_cards",
+      "body": {},
+      "headers": []
+    },
+    {
+      "_id": "req_get_card",
+      "_type": "request",
+      "name": "Get Card",
+      "method": "GET",
+      "url": "{{ _.base_url }}/cards/1",
+      "parentId": "fld_cards",
+      "body": {},
+      "headers": []
+    },
+    {
+      "_id": "req_update_card",
+      "_type": "request",
+      "name": "Update Card",
+      "method": "PUT",
+      "url": "{{ _.base_url }}/cards/1",
+      "parentId": "fld_cards",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"credit_limit\": 8000.00,\n  \"invoice_amount\": 320.50\n}"
+      },
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "_id": "req_delete_card",
+      "_type": "request",
+      "name": "Delete Card",
+      "method": "DELETE",
+      "url": "{{ _.base_url }}/cards/1",
+      "parentId": "fld_cards",
+      "body": {},
+      "headers": []
+    }
+  ]
+}
