@@ -1,0 +1,20 @@
+frase,categoria
+Quero visualizar minha fatura,fatura
+Qual o valor da minha fatura,fatura
+Quantas parcelas eu tenho?,fatura
+"Quero adiantar duas parcelas, tem desconto?",fatura
+Quero pagar minha fatura,fatura
+Quero alterar minha data de vencimento de fatura,fatura
+Quando minha fatura fecha?,fatura
+Desejo parcelar meu cartão,parcelas
+"Eu perdi meu cartão, me ajude",roubo
+Qual o limite cartão,limite
+Quanto ainda posso gastar no cartão?,limite
+Esqueci a senha do cartão,senha
+Mudar senha do cartão,senha
+Quero uma segunda via do cartão,outros
+Quero um cartão virtual,outros
+Quero cancelar meu cartão,bloqueio
+Quero bloquear o cartão,bloqueio
+Quero mudar os dados do cartão,dados
+Quais os dados do cartão?,dados

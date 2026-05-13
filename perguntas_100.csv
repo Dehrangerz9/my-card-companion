@@ -1,0 +1,102 @@
+frase,categoria
+Quero visualizar minha fatura,fatura
+Qual o valor da minha fatura,fatura
+Quantas parcelas eu tenho?,fatura
+"Quero adiantar duas parcelas, tem desconto?",fatura
+Quero pagar minha fatura,fatura
+Quero alterar minha data de vencimento de fatura,fatura
+Quando minha fatura fecha?,fatura
+Desejo parcelar meu cartão,parcelas
+"Eu perdi meu cartão, me ajude",roubo
+Qual o limite cartão,limite
+Quanto ainda posso gastar no cartão?,limite
+Esqueci a senha do cartão,senha
+Mudar senha do cartão,senha
+Quero uma segunda via do cartão,outros
+Quero um cartão virtual,outros
+Quero cancelar meu cartão,bloqueio
+Quero bloquear o cartão,bloqueio
+Quero mudar os dados do cartão,dados
+Quais os dados do cartão?,dados
+Como faço para baixar o PDF da minha fatura?,fatura
+"Minha fatura não chegou por e-mail, o que eu faço?",fatura
+Onde vejo as compras do mês atual?,fatura
+Posso pagar a fatura antes do fechamento?,fatura
+Quais são as opções de pagamento da fatura?,fatura
+Como funciona o parcelamento da fatura?,parcelas
+Qual é a taxa de juros para parcelar a fatura?,parcelas
+Quero renegociar minha dívida do cartão,parcelas
+"Fui roubado, cancelem meu cartão agora",roubo
+Roubaram minha carteira com o cartão,roubo
+Quero aumentar o limite do meu cartão,limite
+Como faço para pedir mais limite?,limite
+"Meu limite foi reduzido, por quê?",limite
+Bloqueei minha senha por errar muitas vezes,senha
+Como recupero a senha do meu cartão de crédito?,senha
+Como faço para desbloquear meu cartão novo?,bloqueio
+Cartão bloqueado por suspeita de fraude,bloqueio
+Quero atualizar meu endereço,dados
+Como mudo o número de telefone cadastrado?,dados
+Como faço para ter isenção da anuidade?,anuidade
+Qual o valor da anuidade do meu cartão?,anuidade
+Quero cancelar meu cartão por causa da anuidade,anuidade
+Quantos pontos eu tenho acumulados?,pontos_cashback
+Como faço para trocar meus pontos por milhas?,pontos_cashback
+Esse cartão tem cashback?,pontos_cashback
+Onde vejo o saldo do meu cashback?,pontos_cashback
+Tem uma compra na minha fatura que não reconheço,contestacao
+Quero contestar uma compra duplicada,contestacao
+Fui cobrado a mais por um serviço,contestacao
+Como cancelo uma compra feita pela internet?,contestacao
+Preciso avisar que vou viajar para o exterior?,viagens
+Como ativar o aviso viagem?,viagens
+Meu cartão tem seguro viagem embutido?,viagens
+Quais são as taxas para compras internacionais?,viagens
+Como pedir um cartão adicional?,cartao_adicional
+O cartão adicional compartilha o mesmo limite?,cartao_adicional
+Qual a idade mínima para ter um cartão adicional?,cartao_adicional
+Posso sacar dinheiro no caixa eletrônico com o cartão de crédito?,saque
+Qual a taxa para saque no cartão de crédito?,saque
+Posso pagar a fatura com MB Way?,fatura
+Onde encontro a referência multibanco para pagamento?,fatura
+Quanto tempo demora o pagamento a ficar refletido?,fatura
+Consigo enviar o extrato para outro endereço de correio eletrónico?,fatura
+Qual o valor mínimo de pagamento da fatura?,fatura
+Como funciona o crédito suplementar?,limite
+"Fiz o pagamento, porque é que o meu plafond ainda não está disponível?",limite
+Qual é o meu plafond máximo?,limite
+Posso transferir limite para outra pessoa?,limite
+Como antecipar o pagamento de prestações?,parcelas
+É possível cancelar uma compra fracionada?,parcelas
+Quantas vezes posso dividir o pagamento sem juros?,parcelas
+O PIN da aplicação é o mesmo do cartão físico?,senha
+Como alterar o código PIN do meu cartão?,senha
+Esqueci-me do código de acesso à app,senha
+"O meu cartão foi bloqueado preventivamente, o que devo fazer?",bloqueio
+Como desbloquear o cartão através da aplicação móvel?,bloqueio
+Como atualizar o meu email de contacto?,dados
+Como alterar o meu nome no cartão após o casamento?,dados
+Os meus pontos têm validade?,pontos_cashback
+Em quanto tempo o cashback fica disponível na minha conta?,pontos_cashback
+Onde posso ver o catálogo de prémios e recompensas?,pontos_cashback
+Posso transferir pontos para a minha conta bancária?,pontos_cashback
+"Não efetuei esta transação online, como resolvo?",contestacao
+Fui alvo de clonagem de cartão,contestacao
+"A compra está cativa, como posso cancelar?",contestacao
+Cobraram-me uma assinatura que eu já tinha cancelado,contestacao
+Como ter acesso aos lounges VIP nos aeroportos?,viagens
+O cartão inclui seguro de aluguer de viaturas?,viagens
+Furtaram-me o telemóvel com o cartão virtual ativo,roubo
+Como participar a perda ou roubo do cartão de imediato?,roubo
+Porque estão a cobrar comissão de disponibilização se não usei o cartão?,anuidade
+Existem condições para ficar isento da comissão anual?,anuidade
+"O cartão adicional já chegou por correio, como ativar?",cartao_adicional
+Como posso cancelar apenas o cartão do meu dependente?,cartao_adicional
+Onde fica a caixa multibanco mais próxima?,saque
+O cash advance tem limite diário?,saque
+Quais são as comissões por levantamento a crédito no estrangeiro?,saque
+A vossa aplicação não está a funcionar,aplicativo
+Como registar a minha conta num novo smartphone?,aplicativo
+O Face ID ou a biometria não funcionam na app,aplicativo
+O meu cartão tem direito a descontos em cinemas?,beneficios
+Quais são os benefícios exclusivos desta rede/bandeira?,beneficios
