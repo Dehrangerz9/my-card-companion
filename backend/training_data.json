@@ -1,0 +1,468 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "language": "pt-BR",
+    "description": "Dados de treinamento do assistente virtual CardVault. Cada intent contém padrões de entrada do usuário, respostas possíveis e uma ação opcional que o frontend pode executar.",
+    "created_at": "2026-05-13",
+    "total_intents": 18,
+    "author": "CardVault"
+  },
+  "config": {
+    "confidence_threshold": 0.15,
+    "model_file": "saved_model.pkl",
+    "vectorizer": "tfidf",
+    "ngram_range": [1, 2],
+    "note": "O modelo treinado é salvo em 'model_file'. Na próxima inicialização o modelo é carregado do disco. Para retreinar, delete o arquivo do modelo ou chame POST /retrain."
+  },
+  "intents": [
+    {
+      "tag": "saldo",
+      "description": "Consulta de saldo e limite disponível nos cartões do usuário",
+      "patterns": [
+        "qual meu saldo",
+        "quanto tenho disponível",
+        "ver saldo",
+        "saldo do cartão",
+        "limite disponível",
+        "quanto posso gastar",
+        "meu limite",
+        "saldo disponível",
+        "quanto tenho de crédito",
+        "qual o limite do meu cartão",
+        "quanto de limite eu tenho",
+        "me mostra o saldo",
+        "quero ver meu saldo",
+        "saldo atual",
+        "limite restante",
+        "quanto sobrou de limite"
+      ],
+      "responses": [
+        "Seu cartão **Platinum** tem R$ 53.847,50 disponível. Seu cartão **Gold** tem R$ 29.246,25 disponível, e seu cartão **Black** tem R$ 188.300,00 disponível. Quer mais detalhes de algum cartão?",
+        "Aqui estão seus saldos disponíveis:\n\n- **Platinum** — R$ 53.847,50\n- **Gold** — R$ 29.246,25\n- **Black** — R$ 188.300,00\n\nPosso te levar a algum cartão específico?"
+      ],
+      "action": null,
+      "action_data": {}
+    },
+    {
+      "tag": "gastos",
+      "description": "Análise e resumo dos gastos mensais por categoria",
+      "patterns": [
+        "mostrar insights de gastos",
+        "insights de gastos",
+        "análise de gastos",
+        "onde estou gastando",
+        "resumo de gastos",
+        "maiores gastos",
+        "categorias de gasto",
+        "extrato",
+        "quanto gastei",
+        "gastos do mês",
+        "relatório financeiro",
+        "quero ver meus gastos",
+        "me mostra meus gastos",
+        "em que estou gastando",
+        "gastei muito esse mês",
+        "como estão meus gastos",
+        "minhas despesas",
+        "controle financeiro"
+      ],
+      "responses": [
+        "Aqui estão suas maiores categorias de gasto este mês:\n\n1. **Compras** — R$ 4.211,50\n2. **Alimentação** — R$ 3.115,75\n3. **Transporte** — R$ 1.562,00\n\nSeus gastos estão **12% menores** que o mês passado. Para ver o extrato completo, posso te levar ao painel.",
+        "Seu resumo financeiro do mês:\n\n- **Compras** lideram com R$ 4.211,50\n- **Alimentação** em segundo com R$ 3.115,75\n- **Transporte** com R$ 1.562,00\n\nDeseja ir ao painel para ver o extrato detalhado?"
+      ],
+      "action": "navigate_dashboard",
+      "action_data": {}
+    },
+    {
+      "tag": "roubo",
+      "description": "Situação de emergência: roubo, furto, fraude ou cartão clonado",
+      "patterns": [
+        "fui roubado",
+        "me roubaram",
+        "perdi minha carteira",
+        "cartão foi roubado",
+        "roubaram meu cartão",
+        "cartão perdido",
+        "perdi meu cartão",
+        "estou sendo roubado",
+        "furto",
+        "assalto",
+        "me assaltaram",
+        "cartão clonado",
+        "clonaram meu cartão",
+        "compra não reconhecida",
+        "transação suspeita",
+        "compra estranha",
+        "alguém usou meu cartão",
+        "fraude",
+        "suspeito de fraude",
+        "não reconheço essa compra",
+        "compra desconhecida",
+        "cobrança indevida",
+        "usaram meu cartão sem minha autorização",
+        "meu cartão foi usado",
+        "acesso não autorizado",
+        "não fiz essa compra",
+        "me roubaram a carteira",
+        "perdi o cartão",
+        "cartão desapareceu"
+      ],
+      "responses": [
+        "Entendo que é uma situação de emergência! Por segurança, posso bloquear **todos os seus cartões** imediatamente. Deseja confirmar o bloqueio de emergência?",
+        "Isso é sério! Para sua proteção, recomendo bloquear todos os cartões agora. Deseja que eu faça isso imediatamente?"
+      ],
+      "action": "block_all_cards",
+      "action_data": {}
+    },
+    {
+      "tag": "bloquear_cartao",
+      "description": "Bloquear ou congelar um cartão específico (genérico, sem especificar qual)",
+      "patterns": [
+        "como bloquear um cartão",
+        "bloquear cartão",
+        "congelar cartão",
+        "suspender cartão",
+        "quero bloquear",
+        "bloquear meu cartão",
+        "desativar cartão",
+        "preciso bloquear um cartão",
+        "quero congelar um cartão",
+        "como faço para bloquear",
+        "bloqueio de cartão",
+        "suspender meu cartão"
+      ],
+      "responses": [
+        "Qual cartão você deseja bloquear? Escolha uma opção abaixo.",
+        "Claro! Me diga qual cartão você quer bloquear:"
+      ],
+      "action": "show_block_options",
+      "action_data": {}
+    },
+    {
+      "tag": "bloquear_platinum",
+      "description": "Bloquear especificamente o cartão Platinum",
+      "patterns": [
+        "bloquear platinum",
+        "bloquear cartão platinum",
+        "congelar platinum",
+        "suspender platinum",
+        "bloquear visa platinum",
+        "bloquear o platinum",
+        "bloquear meu platinum",
+        "quero bloquear o platinum"
+      ],
+      "responses": [
+        "Deseja bloquear o cartão **Platinum** (final 4821)?",
+        "Vou bloquear o **Platinum** (final 4821). Confirma?"
+      ],
+      "action": "block_card",
+      "action_data": { "cardId": "card-1", "cardName": "Platinum", "lastFour": "4821" }
+    },
+    {
+      "tag": "bloquear_gold",
+      "description": "Bloquear especificamente o cartão Gold",
+      "patterns": [
+        "bloquear gold",
+        "bloquear cartão gold",
+        "congelar gold",
+        "suspender gold",
+        "bloquear mastercard gold",
+        "bloquear o gold",
+        "bloquear meu gold",
+        "quero bloquear o gold"
+      ],
+      "responses": [
+        "Deseja bloquear o cartão **Gold** (final 7392)?",
+        "Vou bloquear o **Gold** (final 7392). Confirma?"
+      ],
+      "action": "block_card",
+      "action_data": { "cardId": "card-2", "cardName": "Gold", "lastFour": "7392" }
+    },
+    {
+      "tag": "bloquear_black",
+      "description": "Bloquear especificamente o cartão Black",
+      "patterns": [
+        "bloquear black",
+        "bloquear cartão black",
+        "congelar black",
+        "suspender black",
+        "bloquear visa black",
+        "bloquear o black",
+        "bloquear meu black",
+        "quero bloquear o black"
+      ],
+      "responses": [
+        "Deseja bloquear o cartão **Black** (final 0156)?",
+        "Vou bloquear o **Black** (final 0156). Confirma?"
+      ],
+      "action": "block_card",
+      "action_data": { "cardId": "card-3", "cardName": "Black", "lastFour": "0156" }
+    },
+    {
+      "tag": "pagamentos",
+      "description": "Dúvidas e ações relacionadas a pagamento de fatura",
+      "patterns": [
+        "ajuda com pagamentos",
+        "pagar fatura",
+        "como pagar",
+        "vencimento da fatura",
+        "débito automático",
+        "pagamento automático",
+        "histórico de pagamentos",
+        "fatura em aberto",
+        "pagar conta",
+        "data de vencimento",
+        "quero pagar minha fatura",
+        "como quitar a fatura",
+        "boleto da fatura",
+        "segunda via da fatura",
+        "configurar pagamento automático"
+      ],
+      "responses": [
+        "Posso te levar ao painel para ver e pagar suas faturas. Deseja ir ao painel agora?",
+        "Vou te mostrar suas faturas no painel. Confirma a navegação?"
+      ],
+      "action": "navigate_dashboard",
+      "action_data": {}
+    },
+    {
+      "tag": "cartoes",
+      "description": "Listar cartões ou navegar ao painel principal",
+      "patterns": [
+        "meus cartões",
+        "ver cartões",
+        "listar cartões",
+        "quais cartões tenho",
+        "cartões cadastrados",
+        "ir para o painel",
+        "voltar ao painel",
+        "ir ao painel",
+        "mostrar painel",
+        "abrir painel",
+        "home",
+        "início",
+        "tela inicial",
+        "quero ver meus cartões"
+      ],
+      "responses": [
+        "Você tem 3 cartões: **Platinum** (final 4821), **Gold** (final 7392) e **Black** (final 0156). Quer que eu te leve ao painel?",
+        "Seus cartões são: **Platinum**, **Gold** e **Black**. Deseja ir ao painel para gerenciá-los?"
+      ],
+      "action": "navigate_dashboard",
+      "action_data": {}
+    },
+    {
+      "tag": "ver_platinum",
+      "description": "Navegar para a página de detalhes do cartão Platinum",
+      "patterns": [
+        "ver platinum",
+        "abrir platinum",
+        "detalhes do platinum",
+        "ver cartão platinum",
+        "acessar platinum",
+        "ir para o platinum",
+        "quero ver o platinum",
+        "abrir meu platinum"
+      ],
+      "responses": [
+        "Deseja ir para a página do cartão **Platinum** (final 4821)?",
+        "Vou te levar ao **Platinum** (final 4821). Confirma?"
+      ],
+      "action": "navigate_card",
+      "action_data": { "cardId": "card-1", "cardName": "Platinum" }
+    },
+    {
+      "tag": "ver_gold",
+      "description": "Navegar para a página de detalhes do cartão Gold",
+      "patterns": [
+        "ver gold",
+        "abrir gold",
+        "detalhes do gold",
+        "ver cartão gold",
+        "acessar gold",
+        "ir para o gold",
+        "quero ver o gold",
+        "abrir meu gold"
+      ],
+      "responses": [
+        "Deseja ir para a página do cartão **Gold** (final 7392)?",
+        "Vou te levar ao **Gold** (final 7392). Confirma?"
+      ],
+      "action": "navigate_card",
+      "action_data": { "cardId": "card-2", "cardName": "Gold" }
+    },
+    {
+      "tag": "ver_black",
+      "description": "Navegar para a página de detalhes do cartão Black",
+      "patterns": [
+        "ver black",
+        "abrir black",
+        "detalhes do black",
+        "ver cartão black",
+        "acessar black",
+        "ir para o black",
+        "quero ver o black",
+        "abrir meu black"
+      ],
+      "responses": [
+        "Deseja ir para a página do cartão **Black** (final 0156)?",
+        "Vou te levar ao **Black** (final 0156). Confirma?"
+      ],
+      "action": "navigate_card",
+      "action_data": { "cardId": "card-3", "cardName": "Black" }
+    },
+    {
+      "tag": "fatura",
+      "description": "Consultar o valor e vencimento das faturas atuais",
+      "patterns": [
+        "fatura atual",
+        "ver fatura",
+        "valor da fatura",
+        "fatura do mês",
+        "quanto devo",
+        "total da fatura",
+        "fatura platinum",
+        "fatura gold",
+        "fatura black",
+        "quanto é minha fatura",
+        "qual o valor da fatura",
+        "quando vence minha fatura",
+        "vencimento",
+        "me mostra a fatura"
+      ],
+      "responses": [
+        "Resumo das suas faturas:\n\n- **Platinum** — vence 10/05/2026\n- **Gold** — vence 10/05/2026\n- **Black** — vence 10/05/2026\n\nQuer que eu te leve ao painel para ver os detalhes?",
+        "Suas faturas estão abertas com vencimento em 10/05/2026. Deseja ir ao painel para ver os valores completos?"
+      ],
+      "action": "navigate_dashboard",
+      "action_data": {}
+    },
+    {
+      "tag": "sair",
+      "description": "Fazer logout da conta",
+      "patterns": [
+        "quero sair",
+        "fazer logout",
+        "sair da conta",
+        "deslogar",
+        "encerrar sessão",
+        "sair do app",
+        "logout",
+        "fechar sessão",
+        "quero me desconectar",
+        "encerrar conta"
+      ],
+      "responses": [
+        "Tem certeza que deseja sair da sua conta?",
+        "Vou fazer logout da sua conta. Confirma?"
+      ],
+      "action": "logout",
+      "action_data": {}
+    },
+    {
+      "tag": "ajuda",
+      "description": "Listar as capacidades e funcionalidades do assistente",
+      "patterns": [
+        "o que você faz",
+        "o que voce faz",
+        "me ajuda",
+        "quais são suas funções",
+        "quais sao suas funcoes",
+        "o que você pode fazer",
+        "o que voce pode fazer",
+        "como você pode me ajudar",
+        "lista de comandos",
+        "o que posso perguntar",
+        "funcionalidades",
+        "ajuda",
+        "help",
+        "quais são suas capacidades",
+        "para que você serve",
+        "como você funciona",
+        "o que você sabe fazer",
+        "me explica o que você faz"
+      ],
+      "responses": [
+        "Posso te ajudar com:\n\n- **Saldo e limite** — \"Qual meu saldo?\"\n- **Faturas** — \"Ver fatura\"\n- **Insights de gastos** — \"Análise de gastos\"\n- **Bloquear cartão** — \"Bloquear Gold\"\n- **Emergência (roubo)** — \"Fui roubado\"\n- **Navegar** — \"Ver cartão Platinum\"\n- **Pagamentos** — \"Pagar fatura\"\n- **Sair** — \"Quero sair\""
+      ],
+      "action": null,
+      "action_data": {}
+    },
+    {
+      "tag": "saudacao",
+      "description": "Saudações e cumprimentos iniciais",
+      "patterns": [
+        "olá",
+        "oi",
+        "bom dia",
+        "boa tarde",
+        "boa noite",
+        "hey",
+        "hello",
+        "tudo bem",
+        "como vai",
+        "oi tudo bem",
+        "olá tudo bem",
+        "e aí",
+        "salve",
+        "oi boa tarde",
+        "oi bom dia"
+      ],
+      "responses": [
+        "Olá! Sou o assistente do CardVault. Como posso te ajudar?\n\nDica: pergunte **\"o que você faz\"** para ver tudo que posso fazer por você.",
+        "Oi! Estou aqui para te ajudar com seus cartões. O que você precisa?\n\nNão sabe por onde começar? Pergunte **\"o que você faz\"**."
+      ],
+      "action": null,
+      "action_data": {}
+    },
+    {
+      "tag": "agradecimento",
+      "description": "Expressões de agradecimento do usuário",
+      "patterns": [
+        "obrigado",
+        "obrigada",
+        "valeu",
+        "muito obrigado",
+        "agradeço",
+        "thanks",
+        "brigado",
+        "obg",
+        "muito obrigada",
+        "grato",
+        "grata"
+      ],
+      "responses": [
+        "De nada! Se precisar de mais alguma coisa, é só me chamar.",
+        "Por nada! Estou sempre aqui para ajudar.",
+        "Disponha! Qualquer dúvida, é só perguntar."
+      ],
+      "action": null,
+      "action_data": {}
+    },
+    {
+      "tag": "despedida",
+      "description": "Expressões de despedida do usuário",
+      "patterns": [
+        "tchau",
+        "até logo",
+        "até mais",
+        "adeus",
+        "bye",
+        "até",
+        "falou",
+        "até amanhã",
+        "até breve",
+        "foi um prazer",
+        "flw",
+        "xau"
+      ],
+      "responses": [
+        "Até logo! Foi um prazer ajudar. Cuide das suas finanças!",
+        "Tchau! Se precisar de algo, é só voltar.",
+        "Até mais! Tenha um ótimo dia."
+      ],
+      "action": null,
+      "action_data": {}
+    }
+  ]
+}

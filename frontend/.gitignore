@@ -20,16 +20,6 @@ dist-ssr
 .wrangler/
 .dev.vars
 
-# Python
-backend/venv/
-backend/__pycache__/
-backend/saved_model.pkl
-__pycache__/
-*.pyc
-
-# Database
-*.db
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
